@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.classMapper">
+    <select id="query" resultType="com.example.demo.entity.classBean">
+        select * from class where ClassNo=#{classNo}
+    </select>
+    <select id="queryByTeacher" resultMap="classResultMap">
+        select * from class where TeacherNo=#{teacherNo}
+    </select>
+    <insert id="insert" parameterType="com.example.demo.entity.classBean">
+        insert into class values (#{classNo},#{courseTime},#{teacherNo},#{courseNo})
+    </insert>
+    <resultMap id="classResultMap" type="com.example.demo.entity.classBean">
+        <id property="classNo" column="ClassNo"/>
+        <result property="courseTime" column="CourseTime"/>
+        <result property="teacherNo" column="TeacherNo"/>
+        <result property="courseNo" column="CourseNo"/>
+    </resultMap>
+
+</mapper>

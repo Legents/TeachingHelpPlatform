@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.studentMapper">
+    <select id="queryAll" resultType="com.example.demo.entity.user">
+        select * from student
+    </select>
+    <select id="queryStudentById" resultMap="userResultMap">
+        select * from student where StudentNo=#{id}
+    </select>
+    <select id="queryListByClass" resultMap="userResultMap">
+        select * from student where StudentNo in(
+ select distinct(StudentNo) from demo1.answer_choice where answer_choice.ChoicequestionNo in(
+	select ChoicequestionNo FROM demo1.choicequestion where ClassNo=#{classNo}
+));
+    </select>
+    <insert id="insertStudent" useGeneratedKeys="true"
+            keyProperty="StudentNo" keyColumn="id"
+            parameterType="com.example.demo.entity.user">
+        insert into student(StudentNo,StudentPassword,StudentName,StudentMail) values (#{id},#{userName},#{password},#{email})
+    </insert>
+    <update id="updateStudent"  parameterType="com.example.demo.entity.user">
+        update student
+        <set>
+            <if test="password!=null">StudentPassword=#{password}</if>
+        </set>
+        where StudentNo=#{id}
+    </update>
+    <resultMap id="userResultMap" type="com.example.demo.entity.user">
+        <id property="id" column="StudentNo"/>
+        <result property="password" column="StudentPassword"/>
+        <result property="userName" column="StudentName"/>
+        <result property="email" column="StudentMail"/>
+    </resultMap>
+
+</mapper>

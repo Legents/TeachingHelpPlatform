@@ -1,0 +1,105 @@
+
+#nav {
+    line-height: 25px;/*菜单栏字的位置*/
+    height: 50px;
+    list-style-type: none;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    float:right;
+}
+#nav A {
+    font-family: "宋体";/*一级菜单字体*/
+    font-size: 13px;/*一级菜单字体大小*/
+    font-weight: bold;
+    color: #002a43;/*一级菜单字体颜色*/
+    display: block;
+    width:78px;/*一级菜单每个标签的宽*/
+    height:24px;/*一级菜单每个标签的高*/
+    text-align: center;
+    text-decoration: none;
+    background:#50a7ba/*一级菜单背景色*/
+}
+#nav A:link {
+    color: #002a43;
+    text-decoration: none;
+}
+#nav A:visited {
+    color: #002a43;
+    text-decoration: none;
+}
+#nav A:hover {
+    color: #50a7ba;/*点击一级菜单时按钮的字体颜色*/
+    background-color:#343843;/*点击一级菜单时按钮的背景颜色*/
+    width:78px;
+    height:24px;
+    display:block;
+}
+#nav LI {
+    width: 78px;
+    float: left;
+    position: relative;
+    margin-left:1px;;/*两个按钮之间的距离*/
+}
+#nav ul {
+    visibility: hidden;
+    position: absolute;
+    height: 120px;
+    top: 24px;/*二级菜单距离顶部的距离*/
+    right: 0px;
+    width: 78px;/*二级菜单的宽度*/
+    z-index: 25;
+    background:#ddd;/*二级菜单背景色*/
+    padding:0;
+    list-style:none;
+}
+#nav :hover {
+    white-space: normal;
+    text-decoration: none;
+}
+#nav li:hover ul, #nav a:hover ul {
+    visibility: visible;
+    height: 72px;/*二级菜单高度*/
+    margin-top: 0px;
+    text-align: center;
+}
+#nav :hover ul li {
+    font-weight: normal;
+    height: 24px;
+    width: 76px;/*二级菜单下每个li的长度*/
+    display: block;
+    position: relative;
+    border-collapse: collapse;
+    background-image: none;
+}
+#nav :hover ul li a {
+    font-size: 13px;
+    height: 24px;
+    line-height: 2.0em;
+    float: left;
+    padding: 0 1px;
+    color: #000000;
+    background: none;
+}
+#nav :hover ul li a:hover {
+    color: #fff;
+    background: #50a7ba;/*二级菜单鼠标选中时的颜色*/
+    line-height: 2.0em;
+}
+.head {
+    background:#343843;
+    height:70px;
+    width:100%;
+}
+.head p{
+    font:50px/1.5 '黑体';
+}
+.logo{
+    height:30px;
+    float:right;
+}
+*{
+    padding:0px;
+    margin:0px;
+}
