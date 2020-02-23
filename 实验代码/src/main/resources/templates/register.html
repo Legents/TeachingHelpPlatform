@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>注册</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        body{
+            background:#343843;
+        }
+        .main{
+            width:810px;
+            height:260px;
+            position: absolute;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            margin:auto;
+        }
+        .logo{
+            width: 400px;
+            height: 260px;
+            float: left;
+            border-right:1px solid #535762;
+        }
+
+        .putwrap{
+            width: 300px;
+            height: 260px;
+            padding-left: 30px;
+            float: left;
+        }
+        .uname{
+            width:300px;
+            height:50px;
+        }
+        .uname i{
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background:url(/static/img/tou.png) no-repeat center;
+            background-size: 100%;
+            margin-right: 10px;
+            vertical-align: text-bottom;
+        }
+        .uname input{
+            border:none;
+            background:none;
+            outline: none;
+            height: 30px;
+            font-size: 16px;
+            border-bottom:1px solid #40424f;
+        }
+        .pwd{
+            width:300px;
+            height:50px;
+        }
+        .pwd i{
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background:url(/static/img/suo.png) no-repeat center;
+            background-size: 100%;
+            margin-right: 10px;
+            vertical-align: text-bottom;
+        }
+        .pwd input{
+            border:none;
+            background:none;
+            outline: none;
+            height: 30px;
+            font-size: 16px;
+            border-bottom:1px solid #40424f;
+        }
+        .sub{
+            border-radius: 5px;
+            margin-top: 30px;
+            width:100px;
+            height:25px;
+            font-size: 10px;
+            background:#54acba;
+            border:none;
+            outline: none;
+            color:#fff;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app1" class="wrap">
+    <div class="main">
+            <div class="putwrap">
+                <p v-if="flag===true">{{msg}}</p>
+                <form>
+                <div class="uname">
+                    <i></i><input type="text" name="id" placeholder="账户" v-model="teacher.id">
+                </div>
+                    <div class="uname">
+                        <i></i><input type="text" name="userName" placeholder="姓名" v-model="teacher.userName">
+                    </div>
+                <div class="pwd">
+                    <i></i><input type="password" name="password1" placeholder="密码" v-model="teacher.password">
+                </div>
+                <div class="pwd">
+                    <i></i><input type="password" name="password2" placeholder="确认密码" v-model="passwordTwo">
+
+                </div>
+                <input type="button" class="sub" value="确认" v-on:click="login1()">
+                <a href="/">
+                <input type="button" class="sub" value="立即登录">
+                </a>
+                </form>
+            </div>
+
+    </div>
+</div>
+
+<script>
+    var vm1=new Vue({
+        el:"#app1",
+        data:{
+            flag:false,
+            msg:"",
+            passwordTwo:"",
+            teacher:{
+                id:"",
+                password:"",
+                userName:""
+            }
+        },
+        methods:{
+            login1(){
+                var that =this;
+                that.flag=false;
+                that.msg=null;
+                if(that.passwordTwo===that.teacher.password){
+                    var url="/user/register";
+                    axios.post(url,that.teacher).then(function (value) {
+                        if(value.data){
+                            that.msg="注册成功"
+                            that.flag=true
+                            alert("注册成功："+value.data)
+                        }else{
+                            alert("注册不成功")
+                        }
+                    })
+                }else{
+                    that.msg="两次密码输入不一致";
+                    that.flag=true;
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

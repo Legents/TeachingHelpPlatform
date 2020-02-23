@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.FileMapper">
+
+    <insert id="upFile" parameterType="com.example.demo.entity._File">
+        insert into data(dataName,dataPath,uploadTime,classNo,dataForm,publishTime)
+         values (#{dataName},#{dataPath},#{uploadTime},#{classNo},#{dataForm},#{publishTime})
+    </insert>
+
+    <delete id="deleteFile">
+        delete from data where dataId=#{fileId}
+    </delete>
+
+    <select id="queryFileByType" resultType="com.example.demo.entity.FileToUser">
+        select dataName,uploadTime,classNo,dataForm from data
+            where classNo=#{classNo} and dataForm=#{fileType} and <![CDATA[ publishTime < now() ]]>
+    </select>
+
+    <select id="queryAllFile" resultType="com.example.demo.entity.FileToUser" >
+        select dataName,uploadTime,classNo,dataForm from data
+            where classNo=#{classNo} and <![CDATA[ publishTime < now() ]]>
+    </select>
+
+    <select id="getPath" resultType="String" >
+        select dataPath from data
+            where dataId=#{fileId}
+    </select>
+
+</mapper>
